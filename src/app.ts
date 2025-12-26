@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import { env } from './config/env'
 import { errorMiddleware } from './middlewares/error.middleware'
 import { notFoundMiddleware } from './middlewares/not-found.middleware'
+import { usersRouter } from './modules/users/users.routes'
 
 export const app = express()
 
@@ -22,6 +23,8 @@ app.use(
 app.get('/health', (_req, res) => {
 	res.json({ status: 'ok' })
 })
+
+app.use('/api/users', usersRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorMiddleware)
